@@ -92,7 +92,7 @@ export default function TentangAsosiasiPage() {
 
       {/* SEJARAH ORGANISASI */}
       <section className="mx-auto max-w-7xl px-6 py-16 sm:px-8 md:py-24 lg:px-20">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-4">
             <p className="mb-3 text-blue-600 font-mono">
               Tentang Kami
@@ -101,8 +101,6 @@ export default function TentangAsosiasiPage() {
             <h2 className="text-2xl font-medium tracking-tight text-slate-900 sm:text-3xl">
               Sejarah Organisasi
             </h2>
-
-            <div className="mt-6 h-1 w-12 rounded-full bg-blue-600" />
           </div>
 
           <div className="space-y-5 text-sm leading-8 text-slate-600 sm:text-base lg:col-span-8">

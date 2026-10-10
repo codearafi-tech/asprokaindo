@@ -3,9 +3,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { useEffect, useMemo, useState } from "react"
-
 import type { AuthChangeEvent, Session } from "@supabase/supabase-js"
-
 import { Menu } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -61,6 +59,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [authLoading, setAuthLoading] = useState(true)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const supabase = useMemo(() => createClient(), [])
 
@@ -122,6 +121,14 @@ export default function Navbar() {
   }, [supabase])
 
   // ============================================================
+  // MOBILE NAVIGATION
+  // ============================================================
+
+  function closeMobileMenu() {
+    setIsMobileMenuOpen(false)
+  }
+
+  // ============================================================
   // AUTH BUTTON
   // ============================================================
 
@@ -130,8 +137,10 @@ export default function Navbar() {
       asChild
       variant={scrolled ? "default" : "secondary"}
       className={`h-10 rounded-lg px-5 transition-all duration-300 ${
-        scrolled ? "bg-blue-600 text-white hover:bg-blue-700" : "bg-white text-foreground hover:bg-white/90"
-      } `}
+        scrolled
+          ? "bg-blue-600 text-white hover:bg-blue-700"
+          : "bg-white text-foreground hover:bg-white/90"
+      }`}
     >
       <Link href={isLoggedIn ? "/dashboard" : "/login"}>
         {authLoading ? "..." : isLoggedIn ? "Dashboard" : "Masuk"}
@@ -167,11 +176,11 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 w-full transition-all duration-300 px-6 md:px-28 ${
+      className={`fixed inset-x-0 top-0 z-50 w-full px-6 transition-all duration-300 md:px-28 ${
         scrolled
           ? "border-b border-black/10 bg-white/95 backdrop-blur-md"
           : "border-b border-transparent bg-transparent"
-      } `}
+      }`}
     >
       <nav className="w-full">
         <div className="w-full">
@@ -184,6 +193,7 @@ export default function Navbar() {
               href="/"
               className="flex shrink-0 items-center gap-2.5"
               aria-label="ASPROKAI - Beranda"
+              onClick={closeMobileMenu}
             >
               <Image
                 src="/Asproka-logo.png"
@@ -195,10 +205,11 @@ export default function Navbar() {
                 }`}
                 priority
               />
+
               <span
                 className={`text-lg font-semibold tracking-tight transition-colors duration-300 ${
                   scrolled ? "text-foreground" : "text-white"
-                } `}
+                }`}
               >
                 ASPROKAI
               </span>
@@ -210,9 +221,7 @@ export default function Navbar() {
 
             <NavigationMenu className="ml-5 hidden lg:flex">
               <NavigationMenuList>
-                {/* ==================================================
-                    BERANDA
-                ================================================== */}
+                {/* BERANDA */}
 
                 <NavigationMenuItem>
                   <NavigationMenuLink asChild>
@@ -222,24 +231,17 @@ export default function Navbar() {
                   </NavigationMenuLink>
                 </NavigationMenuItem>
 
-                {/* ==================================================
-                    TENTANG KAMI
-                ================================================== */}
+                {/* TENTANG KAMI */}
 
                 <NavigationMenuItem>
                   <NavigationMenuLink asChild>
-                    <Link
-                      href="/tentang-kami"
-                      className={navigationLinkClass}
-                    >
+                    <Link href="/tentang-kami" className={navigationLinkClass}>
                       Tentang Kami
                     </Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
 
-                {/* ==================================================
-                    KEANGGOTAAN
-                ================================================== */}
+                {/* KEANGGOTAAN */}
 
                 <NavigationMenuItem>
                   <NavigationMenuTrigger
@@ -274,6 +276,8 @@ export default function Navbar() {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
+                {/* GALERI */}
+
                 <NavigationMenuItem>
                   <NavigationMenuLink asChild>
                     <Link href="/galeri" className={navigationLinkClass}>
@@ -295,7 +299,7 @@ export default function Navbar() {
             ================================================== */}
 
             <div className="ml-auto lg:hidden">
-              <Sheet>
+              <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
                 <SheetTrigger asChild>
                   <Button
                     variant="ghost"
@@ -304,19 +308,16 @@ export default function Navbar() {
                       scrolled
                         ? "text-foreground hover:bg-black/5"
                         : "text-white hover:bg-white/10 hover:text-white"
-                    } `}
+                    }`}
                     aria-label="Buka menu"
                   >
                     <Menu className="size-5" />
-
                     <span className="sr-only">Buka menu</span>
                   </Button>
                 </SheetTrigger>
 
                 <SheetContent side="right" className="w-[85%] max-w-sm">
-                  {/* ==================================================
-                      MOBILE HEADER
-                  ================================================== */}
+                  {/* MOBILE HEADER */}
 
                   <SheetHeader>
                     <SheetTitle className="flex items-center gap-2.5 text-left">
@@ -327,38 +328,35 @@ export default function Navbar() {
                         height={28}
                         className="size-7 object-contain"
                       />
+
                       <span>ASPROKAI</span>
                     </SheetTitle>
                   </SheetHeader>
 
                   <div className="mt-8 flex flex-col gap-1">
-                    {/* ==================================================
-                        BERANDA
-                    ================================================== */}
+                    {/* BERANDA */}
 
                     <Button
                       asChild
                       variant="ghost"
                       className="h-11 justify-start px-4 text-sm"
+                      onClick={closeMobileMenu}
                     >
                       <Link href="/">Beranda</Link>
                     </Button>
 
-                    {/* ==================================================
-                        TENTANG KAMI
-                    ================================================== */}
+                    {/* TENTANG KAMI */}
 
                     <Button
                       asChild
                       variant="ghost"
                       className="h-11 justify-start px-4 text-sm"
+                      onClick={closeMobileMenu}
                     >
                       <Link href="/tentang-kami">Tentang Kami</Link>
                     </Button>
 
-                    {/* ==================================================
-                        KEANGGOTAAN
-                    ================================================== */}
+                    {/* KEANGGOTAAN */}
 
                     <div className="mt-3 border-t pt-3">
                       <p className="px-4 py-2 text-xs font-medium tracking-wider text-muted-foreground uppercase">
@@ -372,6 +370,7 @@ export default function Navbar() {
                             asChild
                             variant="ghost"
                             className="h-11 justify-start px-4 text-sm font-normal"
+                            onClick={closeMobileMenu}
                           >
                             <Link href={item.href}>{item.title}</Link>
                           </Button>
@@ -379,12 +378,25 @@ export default function Navbar() {
                       </div>
                     </div>
 
-                    {/* ==================================================
-                        MOBILE AUTH
-                    ================================================== */}
+                    {/* GALERI */}
 
-                    <div className="mt-6 border-t pt-6 px-4 md:px-0">
-                      <Button asChild className="h-11 w-full">
+                    <Button
+                      asChild
+                      variant="ghost"
+                      className="h-11 justify-start px-4 text-sm"
+                      onClick={closeMobileMenu}
+                    >
+                      <Link href="/galeri">Galeri</Link>
+                    </Button>
+
+                    {/* MOBILE AUTH */}
+
+                    <div className="mt-6 border-t px-4 pt-6 md:px-0">
+                      <Button
+                        asChild
+                        className="h-11 w-full"
+                        onClick={closeMobileMenu}
+                      >
                         <Link href={isLoggedIn ? "/dashboard" : "/login"}>
                           {authLoading
                             ? "..."

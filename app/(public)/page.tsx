@@ -45,13 +45,13 @@ export default async function Page() {
           HERO
       ====================================================== */}
 
-      <section className="relative z-10 min-h-svh">
-        <div className="relative flex min-h-svh flex-col max-w-7xl mx-auto px-6 md:px-20">
+      <section className="relative z-10 h-screen">
+        <div className="relative flex flex-col max-w-7xl mx-auto px-6 md:px-20 h-svh">
           {/* =================================================
               HERO CONTENT
           ================================================== */}
 
-          <div className="flex flex-col  flex-1 justify-center pb-10 md:pb-0">
+          <div className="flex flex-col flex-1 justify-center pb-32 md:pb-0">
             <div className="flex max-w-4xl flex-col gap-5 md:gap-6">
               <h1 className="max-w-4xl text-4xl leading-tight tracking-tight text-white sm:text-5xl md:text-6xl">
                 Asosiasi Profesi Pengembang Kecerdasan Artifisial
@@ -320,12 +320,12 @@ export default async function Page() {
             <div className="lg:col-span-6">
               <div className="mb-5 font-mono text-white">Keanggotaan</div>
 
-              <h2 className="max-w-xl text-4xl md:text-5xl leading-[1.05] tracking-tight text-white">
+              <h2 className="max-w-xl text-4xl md:text-5xl leading-tight tracking-tight text-white">
                 Bergabung dengan
                 <span className="text-white/50"> ekosistem AI Indonesia.</span>
               </h2>
 
-              <p className="mt-6 max-w-lg text-base leading-relaxed text-white/65 sm:text-lg">
+              <p className="mt-6 max-w-lg text-base leading-relaxed text-white/80 sm:text-lg">
                 Menjadi bagian dari komunitas profesional yang mendorong
                 pengembangan, kolaborasi, dan kemajuan kecerdasan artifisial di
                 Indonesia.
