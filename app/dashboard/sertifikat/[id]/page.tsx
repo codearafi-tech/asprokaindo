@@ -209,7 +209,7 @@ export default async function CertificatePage({ params }: PageProps) {
                 PENYELENGGARA
               </p>
 
-              <p className="mt-1 text-[7px] font-semibold break-words text-slate-800 sm:text-sm">
+              <p className="mt-1 text-[7px] font-semibold wrap-break-word text-slate-800 sm:text-sm">
                 {organizer}
               </p>
             </div>

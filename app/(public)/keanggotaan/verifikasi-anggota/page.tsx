@@ -1,3 +1,6 @@
+
+import { Suspense } from "react"
+
 import MeshGradient from "@/components/ui/mesh-gradient"
 import VerificationMemberForm from "./verification-member-form"
 
@@ -15,7 +18,15 @@ export default function Page() {
       />
 
       <div className="relative z-10 w-full max-w-md">
-        <VerificationMemberForm />
+        <Suspense
+          fallback={
+            <div className="rounded-2xl bg-white p-8 text-center text-sm text-slate-500 shadow-xl">
+              Memuat halaman verifikasi...
+            </div>
+          }
+        >
+          <VerificationMemberForm />
+        </Suspense>
       </div>
     </section>
   )
