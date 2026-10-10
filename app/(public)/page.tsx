@@ -46,14 +46,14 @@ export default async function Page() {
       ====================================================== */}
 
       <section className="relative z-10 min-h-svh">
-        <div className="relative flex min-h-svh flex-col max-w-7xl mx-auto px-6 sm:px-8 lg:px-20">
+        <div className="relative flex min-h-svh flex-col max-w-7xl mx-auto px-6 md:px-20">
           {/* =================================================
               HERO CONTENT
           ================================================== */}
 
-          <div className="flex flex-1 items-center pb-44 sm:pb-48 md:pb-0">
+          <div className="flex flex-col  flex-1 justify-center pb-10 md:pb-0">
             <div className="flex max-w-4xl flex-col gap-5 md:gap-6">
-              <h1 className="max-w-4xl text-4xl leading-[1.1] tracking-tight text-white sm:text-5xl md:text-6xl">
+              <h1 className="max-w-4xl text-4xl leading-tight tracking-tight text-white sm:text-5xl md:text-6xl">
                 Asosiasi Profesi Pengembang Kecerdasan Artifisial
               </h1>
 
@@ -108,13 +108,13 @@ export default async function Page() {
 
       {/* Tentang Asosiasi */}
       <section className="relative z-10 bg-white py-16">
-        <div className="mx-auto max-w-7xl space-y-6 px-6 sm:px-8 lg:px-20">
+        <div className="mx-auto max-w-7xl space-y-6 px-6 lg:px-20">
           <div className="font-mono text-blue-600">Tentang Asosiasi</div>
-          <h2 className="max-w-4xl text-5xl leading-tight tracking-tight">
+          <h2 className="max-w-4xl text-3xl md:text-5xl leading-tight tracking-tight">
             Wadah profesional yang mendedikasikan diri untuk kemajuan ekosistem
             AI nasional.
           </h2>
-          <p className="max-w-3xl text-lg leading-relaxed text-slate-700">
+          <p className="max-w-3xl md:text-lg leading-relaxed text-slate-700">
             ASPROKAINDONESIA didirikan oleh sekelompok akademisi, peneliti, dan
             praktisi kecerdasan artifisial yang memiliki visi bersama untuk
             memajukan ekosistem AI di Indonesia.
@@ -136,18 +136,18 @@ export default async function Page() {
           <div className="absolute bottom-0 -left-40 h-80 w-80 rounded-full bg-blue-500/5 blur-3xl" />
         </div>
 
-        <div className="relative mx-auto max-w-7xl sm:px-8 lg:px-20">
+        <div className="relative mx-auto md:max-w-7xl px-6 md:px-28">
           {/* =================================================
         HEADER
     ================================================== */}
 
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end">
+          <div className="grid grid-cols-1 gap-4 md:gap-10 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-7">
               <div className="mb-5 font-mono text-white">
                 Keuntungan Menjadi Anggota
               </div>
 
-              <h2 className="max-w-4xl text-5xl leading-tight tracking-tight text-white">
+              <h2 className="max-w-4xl text-4xl md:text-5xl leading-tight tracking-tight text-white">
                 Lebih dari sekadar
                 <span className=""> keanggotaan.</span>
               </h2>
@@ -310,8 +310,8 @@ export default async function Page() {
     MEMBERSHIP
 ====================================================== */}
 
-      <section className="relative z-10 overflow-hidden py-20">
-        <div className="relative mx-auto max-w-7xl px-6 sm:px-8 lg:px-20">
+      <section className="relative z-10 overflow-hidden md:py-20">
+        <div className="relative mx-auto max-w-7xl px-6 md:px-20">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
             {/* =================================================
           LEFT — INTRODUCTION
@@ -320,7 +320,7 @@ export default async function Page() {
             <div className="lg:col-span-6">
               <div className="mb-5 font-mono text-white">Keanggotaan</div>
 
-              <h2 className="max-w-xl text-5xl leading-[1.05] tracking-tight text-white">
+              <h2 className="max-w-xl text-4xl md:text-5xl leading-[1.05] tracking-tight text-white">
                 Bergabung dengan
                 <span className="text-white/50"> ekosistem AI Indonesia.</span>
               </h2>
@@ -356,7 +356,7 @@ export default async function Page() {
                   {/* Price */}
                   <div className="mt-8">
                     <div className="flex items-end gap-2">
-                      <span className="text-5xl font-semibold tracking-tight text-slate-950 sm:text-6xl">
+                      <span className="text-4xl md:text-5xl font-semibold tracking-tight text-slate-950 sm:text-6xl">
                         Rp 150.000
                       </span>
 
@@ -441,21 +441,21 @@ export default async function Page() {
 ====================================================== */}
 
       <section className="relative z-10 overflow-hidden py-20">
-        <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-20">
+        <div className="mx-auto max-w-7xl px-6 md:px-20">
           {/* =================================================
         HEADER
     ================================================== */}
 
-          <div className="flex items-end justify-between">
+          <div className="flex flex-col md:flex-row items-end justify-between">
             <div>
               <div className="font-mono text-white">FAQ</div>
 
-              <h2 className="mt-5 text-5xl leading-tight tracking-tight text-white">
+              <h2 className="mt-5 text-4xl md:text-5xl leading-tight tracking-tight text-white">
                 Pertanyaan yang paling sering diajukan
               </h2>
             </div>
 
-            <p className="mt-5 max-w-lg text-sm leading-relaxed text-white/80 sm:text-base">
+            <p className="mt-5 max-w-lg leading-relaxed text-white/80 sm:text-base">
               Temukan jawaban atas pertanyaan umum mengenai keanggotaan,
               pendaftaran, verifikasi, dan kegiatan asosiasi.
             </p>
@@ -476,7 +476,7 @@ export default async function Page() {
                   Masih punya pertanyaan?
                 </p>
 
-                <p className="mt-2 text-sm leading-relaxed text-white/50">
+                <p className="mt-2 text-sm leading-relaxed text-white/80">
                   Tidak menemukan jawaban yang Anda cari? Hubungi kami untuk
                   mendapatkan informasi lebih lanjut.
                 </p>
@@ -508,7 +508,7 @@ export default async function Page() {
                   </summary>
 
                   <div className="px-5 pt-4 pb-2 sm:px-6">
-                    <p className="max-w-2xl text-sm leading-relaxed text-white/55">
+                    <p className="max-w-2xl text-sm leading-relaxed text-white/80">
                       ASPROKAINDONESIA merupakan wadah profesional bagi
                       akademisi, peneliti, praktisi, dan individu yang memiliki
                       ketertarikan terhadap pengembangan kecerdasan artifisial
@@ -528,7 +528,7 @@ export default async function Page() {
                   </summary>
 
                   <div className="px-5 pt-4 pb-2 sm:px-6">
-                    <p className="max-w-2xl text-sm leading-relaxed text-white/55">
+                    <p className="max-w-2xl text-sm leading-relaxed text-white/80">
                       Keanggotaan terbuka bagi individu yang memiliki latar
                       belakang, pengalaman, kompetensi, atau ketertarikan di
                       bidang kecerdasan artifisial dan pengembangannya di
@@ -548,7 +548,7 @@ export default async function Page() {
                   </summary>
 
                   <div className="px-5 pt-4 pb-2 sm:px-6">
-                    <p className="max-w-2xl text-sm leading-relaxed text-white/55">
+                    <p className="max-w-2xl text-sm leading-relaxed text-white/80">
                       Biaya keanggotaan adalah{" "}
                       <span className="font-medium text-white">Rp 150.000</span>{" "}
                       dan berlaku selama 12 bulan sejak keanggotaan disetujui
@@ -568,7 +568,7 @@ export default async function Page() {
                   </summary>
 
                   <div className="px-5 pt-4 pb-2 sm:px-6">
-                    <p className="max-w-2xl text-sm leading-relaxed text-white/55">
+                    <p className="max-w-2xl text-sm leading-relaxed text-white/80">
                       Pendaftaran dilakukan secara online dengan membuat akun,
                       melengkapi data keanggotaan, melakukan pembayaran, dan
                       mengunggah bukti pembayaran. Data kemudian diperiksa oleh
@@ -588,7 +588,7 @@ export default async function Page() {
                   </summary>
 
                   <div className="px-5 pt-4 pb-2 sm:px-6">
-                    <p className="max-w-2xl text-sm leading-relaxed text-white/55">
+                    <p className="max-w-2xl text-sm leading-relaxed text-white/80">
                       Anggota mendapatkan akses ke berbagai program dan kegiatan
                       asosiasi, kartu anggota digital, sertifikat keanggotaan,
                       serta kesempatan untuk terhubung dan berkolaborasi dengan
@@ -608,7 +608,7 @@ export default async function Page() {
                   </summary>
 
                   <div className="px-5 pt-4 pb-2 sm:px-6">
-                    <p className="max-w-2xl text-sm leading-relaxed text-white/55">
+                    <p className="max-w-2xl text-sm leading-relaxed text-white/80">
                       Proses verifikasi dilakukan setelah seluruh data dan bukti
                       pembayaran diterima. Waktu verifikasi bergantung pada
                       proses pemeriksaan oleh administrator.

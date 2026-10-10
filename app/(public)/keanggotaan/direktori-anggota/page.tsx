@@ -106,12 +106,12 @@ export default async function DirektoriAnggotaPage() {
         <div className="pointer-events-none absolute -top-32 -right-24 -z-10 size-96 rounded-full bg-blue-400/15 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-40 left-1/3 -z-10 size-96 rounded-full bg-indigo-400/10 blur-3xl" />
 
-        <div className="mx-auto max-w-7xl px-6 pt-28 pb-12 sm:px-8 sm:pb-14 lg:px-20">
-          <h1 className="mt-4 max-w-3xl text-3xl tracking-tight text-white sm:text-4xl md:text-5xl">
+        <div className="mx-auto max-w-7xl pt-28  pb-14 px-6 md:pb-16 lg:px-20">
+          <h1 className="mt-4 max-w-3xl tracking-tight text-white text-4xl md:text-5xl">
             Direktori Anggota
           </h1>
 
-          <p className="mt-4 max-w-2xl text-sm leading-7 text-white/80 sm:text-base">
+          <p className="mt-4 max-w-2xl leading-7 text-white/80 text-sm md:text-base">
             Kenali para profesional yang tergabung dalam jaringan kecerdasan
             artifisial ASPROKAI.
           </p>

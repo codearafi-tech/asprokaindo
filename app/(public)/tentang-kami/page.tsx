@@ -76,13 +76,13 @@ export default function TentangAsosiasiPage() {
       <section className="relative isolate overflow-hidden bg-linear-to-br from-[#071633] via-[#102b65] to-[#1b3d80]">
         <div className="pointer-events-none absolute -top-32 -right-32 -z-10 size-96 rounded-full bg-blue-400/15 blur-3xl" />
 
-        <div className="mx-auto max-w-7xl px-6 pt-32 pb-14 sm:px-8 md:pb-16 lg:px-20">
+        <div className="mx-auto max-w-7xl pt-28 pb-14 px-6 md:pb-16 lg:px-20">
 
-          <h1 className="mt-4 max-w-3xl text-3xl tracking-tight text-white sm:text-4xl md:text-5xl">
+          <h1 className="mt-4 max-w-3xl tracking-tight text-white text-4xl md:text-5xl">
             Tentang Asosiasi
           </h1>
 
-          <p className="mt-4 max-w-2xl text-sm leading-7 text-white/80 sm:text-base">
+          <p className="mt-4 max-w-2xl text-sm md:text-base leading-7 text-white/80">
             Asosiasi Profesi Pengembang Kecerdasan Artifisial Indonesia — wadah
             profesional yang mendedikasikan diri untuk kemajuan ekosistem AI
             nasional.

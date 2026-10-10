@@ -167,7 +167,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 w-full transition-all duration-300 sm:px-8 lg:px-28 ${
+      className={`fixed inset-x-0 top-0 z-50 w-full transition-all duration-300 px-6 md:px-28 ${
         scrolled
           ? "border-b border-black/10 bg-white/95 backdrop-blur-md"
           : "border-b border-transparent bg-transparent"
@@ -353,7 +353,7 @@ export default function Navbar() {
                       variant="ghost"
                       className="h-11 justify-start px-4 text-sm"
                     >
-                      <Link href="/tentang/asosiasi">Tentang Kami</Link>
+                      <Link href="/tentang-kami">Tentang Kami</Link>
                     </Button>
 
                     {/* ==================================================
@@ -383,7 +383,7 @@ export default function Navbar() {
                         MOBILE AUTH
                     ================================================== */}
 
-                    <div className="mt-6 border-t pt-6">
+                    <div className="mt-6 border-t pt-6 px-4 md:px-0">
                       <Button asChild className="h-11 w-full">
                         <Link href={isLoggedIn ? "/dashboard" : "/login"}>
                           {authLoading
