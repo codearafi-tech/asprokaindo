@@ -56,9 +56,9 @@ export default async function AdminLayout({
           <AppSidebar />
 
           {/* Konten utama */}
-          <main className="flex min-h-svh min-w-0 flex-1 flex-col overflow-x-clip bg-muted/40">
+          <main className="flex min-h-svh min-w-0 flex-1 flex-col overflow-x-clip bg-white">
             {/* Header admin */}
-            <header className="sticky top-0 z-30 flex h-16 w-full shrink-0 items-center gap-4 border-b bg-background px-4 md:px-6">
+            <header className="sticky top-0 z-30 flex h-16 w-full shrink-0 items-center gap-4 border-b border-border bg-white px-4 opacity-100 md:px-6">
               <SidebarTrigger />
 
               <div className="min-w-0 flex-1">
@@ -67,7 +67,7 @@ export default async function AdminLayout({
             </header>
 
             {/* Konten halaman */}
-            <div className="w-full min-w-0 flex-1 p-4 md:p-6">
+            <div className="w-full min-w-0 bg-background flex-1 p-4 md:p-6">
               {children}
             </div>
           </main>

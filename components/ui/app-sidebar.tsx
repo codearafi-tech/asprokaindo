@@ -72,17 +72,17 @@ export function AppSidebar() {
 
   return (
     <Sidebar>
-      <SidebarHeader className="flex h-16 flex-row items-center gap-3 border-b px-4">
+      <SidebarHeader className="flex h-16 flex-row items-center gap-3 border-b border-sidebar-border px-4">
         <img
           src="/Asproka-logo.png"
           alt="Logo Asproka"
-          className="w-8 object-contain"
+          className="w-8 object-contain brightness-0 invert"
         />
         <div className="flex flex-col">
           <h2 className="text-base leading-none font-semibold tracking-tight uppercase">
             Asproka
           </h2>
-          <p className="mt-1 text-xs text-muted-foreground">Admin Panel</p>
+          <p className="mt-1 text-xs text-blue-100/90">Admin Portal</p>
         </div>
       </SidebarHeader>
 
@@ -158,19 +158,19 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="border-t p-3">
+      <SidebarFooter className="border-t border-sidebar-border p-4">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
               onClick={handleLogout}
-              className="h-10 rounded-lg text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
+              className="h-10 rounded-lg text-blue-100/90 transition-colors hover:bg-white/10 hover:text-white"
             >
               <LogOut className="h-4 w-4" />
               <span>Log Out</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
-      </SidebarFooter> 
+      </SidebarFooter>
     </Sidebar>
   )
 }
