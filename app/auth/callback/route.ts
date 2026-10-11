@@ -1,24 +1,26 @@
 import { NextResponse } from "next/server"
-
 import { createClient } from "@/lib/supabase/server"
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url)
-
   const code = searchParams.get("code")
 
   // =========================================================
-  // 1. CEK CODE OAUTH
+  // 1. VALIDASI OAUTH CODE
   // =========================================================
 
   if (!code) {
-    return NextResponse.redirect(`${origin}/login?error=auth_failed`)
+    console.error("OAuth callback gagal: authorization code tidak ditemukan.")
+
+    return NextResponse.redirect(
+      new URL("/login?error=auth_failed", origin)
+    )
   }
 
   const supabase = await createClient()
 
   // =========================================================
-  // 2. EXCHANGE CODE → SESSION
+  // 2. TUKAR OAUTH CODE DENGAN SESSION
   // =========================================================
 
   const { error: exchangeError } =
@@ -27,11 +29,13 @@ export async function GET(request: Request) {
   if (exchangeError) {
     console.error("Exchange Code Error:", exchangeError)
 
-    return NextResponse.redirect(`${origin}/login?error=auth_failed`)
+    return NextResponse.redirect(
+      new URL("/login?error=auth_failed", origin)
+    )
   }
 
   // =========================================================
-  // 3. AMBIL USER GOOGLE
+  // 3. AMBIL DATA USER YANG LOGIN
   // =========================================================
 
   const {
@@ -42,17 +46,17 @@ export async function GET(request: Request) {
   if (userError || !user) {
     console.error("Get User Error:", userError)
 
-    return NextResponse.redirect(`${origin}/login?error=auth_failed`)
+    return NextResponse.redirect(
+      new URL("/login?error=auth_failed", origin)
+    )
   }
 
-  console.log("================================")
-  console.log("LOGIN DEBUG")
-  console.log("Email:", user.email)
+  console.log("========== OAUTH CALLBACK ==========")
   console.log("User ID:", user.id)
-  console.log("================================")
+  console.log("Email:", user.email)
 
   // =========================================================
-  // 4. CEK APAKAH EMAIL ADALAH ADMIN
+  // 4. CEK EMAIL ADMIN
   // =========================================================
 
   const adminEmails =
@@ -60,242 +64,234 @@ export async function GET(request: Request) {
       .map((email) => email.trim().toLowerCase())
       .filter(Boolean) ?? []
 
-  const userEmail = user.email?.toLowerCase() ?? ""
+  const userEmail = user.email?.trim().toLowerCase() ?? ""
+  const isAdmin = Boolean(userEmail && adminEmails.includes(userEmail))
 
-  const isAdmin = adminEmails.includes(userEmail)
-
-  console.log("Is Admin:", isAdmin)
+  console.log("Is Admin Email:", isAdmin)
 
   // =========================================================
-  // 5. CARI PROFILE
+  // 5. AMBIL PROFILE DARI DATABASE
   // =========================================================
 
   const { data: profile, error: profileError } = await supabase
     .from("profiles")
-    .select(
-      `
-          id,
-          email,
-          full_name,
-          role,
-          verification_status,
-          member_number,
-          certificate_number,
-          registered_at,
-          membership_start_date,
-          membership_expiry_date
-        `
-    )
+    .select(`
+      id,
+      email,
+      full_name,
+      role,
+      verification_status,
+      member_number,
+      certificate_number,
+      registered_at,
+      membership_start_date,
+      membership_expiry_date
+    `)
     .eq("id", user.id)
     .maybeSingle()
-
-  console.log("Profile:", profile)
-  console.log("Profile Error:", profileError)
 
   if (profileError) {
     console.error("Gagal mengambil profile:", profileError)
 
-    return NextResponse.redirect(`${origin}/login?error=profile_fetch_failed`)
+    return NextResponse.redirect(
+      new URL("/login?error=profile_fetch_failed", origin)
+    )
   }
 
+  console.log("Profile ditemukan:", Boolean(profile))
+  console.log("Profile Role:", profile?.role ?? "belum ada")
+  console.log(
+    "Verification Status:",
+    profile?.verification_status ?? "belum ada"
+  )
+
   // =========================================================
-  // 6. USER BARU
+  // 6. BUAT PROFILE JIKA USER BARU
   // =========================================================
 
   if (!profile) {
-    console.log("Profile belum ditemukan. Membuat profile baru...")
+    const fullName =
+      user.user_metadata?.full_name ||
+      user.user_metadata?.name ||
+      ""
 
-    // =======================================================
+    const avatarUrl =
+      user.user_metadata?.avatar_url ||
+      user.user_metadata?.picture ||
+      ""
+
+    // -------------------------------------------------------
     // 6A. ADMIN BARU
-    // =======================================================
+    // -------------------------------------------------------
 
     if (isAdmin) {
-      console.log("EMAIL TERDAFTAR SEBAGAI ADMIN")
+      console.log("Membuat profile admin baru...")
 
-      const { data: newAdmin, error: adminInsertError } = await supabase
+      const { error: adminInsertError } = await supabase
         .from("profiles")
         .insert({
           id: user.id,
           email: user.email,
-          full_name:
-            user.user_metadata?.full_name || user.user_metadata?.name || "",
-          avatar_url:
-            user.user_metadata?.avatar_url || user.user_metadata?.picture || "",
+          full_name: fullName,
+          avatar_url: avatarUrl,
           role: "admin",
           verification_status: "verified",
 
-          // Admin tidak memiliki nomor anggota
+          // Admin tidak memiliki nomor anggota.
           member_number: null,
-
-          // Admin tidak memiliki nomor sertifikat anggota
           certificate_number: null,
 
+          // Masa keanggotaan tidak berlaku untuk admin.
           registered_at: null,
           membership_start_date: null,
           membership_expiry_date: null,
         })
-        .select(
-          `
-              id,
-              email,
-              full_name,
-              role,
-              verification_status,
-              member_number,
-              certificate_number,
-              registered_at
-            `
-        )
-        .single()
-
-      console.log("New Admin:", newAdmin)
-      console.log("Admin Insert Error:", adminInsertError)
 
       if (adminInsertError) {
-        console.error("GAGAL MEMBUAT PROFILE ADMIN:", adminInsertError)
+        console.error(
+          "Gagal membuat profile admin:",
+          adminInsertError
+        )
 
         return NextResponse.redirect(
-          `${origin}/login?error=admin_creation_failed`
+          new URL("/login?error=admin_creation_failed", origin)
         )
       }
 
-      console.log("ADMIN BARU → /admin")
+      console.log("Admin baru berhasil dibuat.")
 
-      return NextResponse.redirect(`${origin}/admin`)
+      return NextResponse.redirect(new URL("/admin", origin))
     }
 
-    // =======================================================
+    // -------------------------------------------------------
     // 6B. MEMBER BARU
-    // =======================================================
+    // -------------------------------------------------------
 
-    console.log("USER BARU → MEMBER")
-
-    // =======================================================
-    // Waktu registrasi
-    // =======================================================
+    console.log("Membuat profile member baru...")
 
     const registeredAt = new Date().toISOString()
 
-    // =======================================================
-    // Buat profile member
-    //
-    // NOMOR ANGGOTA BELUM DIBUAT DI SINI.
-    //
-    // Nomor anggota baru dibuat ketika admin menyetujui
-    // dokumen verifikasi.
-    // =======================================================
-
-    const { data: newProfile, error: insertError } = await supabase
+    const { error: memberInsertError } = await supabase
       .from("profiles")
       .insert({
         id: user.id,
         email: user.email,
-        full_name:
-          user.user_metadata?.full_name || user.user_metadata?.name || "",
-        avatar_url:
-          user.user_metadata?.avatar_url || user.user_metadata?.picture || "",
+        full_name: fullName,
+        avatar_url: avatarUrl,
         role: "member",
         verification_status: "pending",
 
-        // Nomor anggota dibuat SETELAH VERIFIKASI
+        // Nomor dibuat setelah admin menyetujui verifikasi.
         member_number: null,
-
-        // Nomor sertifikat juga dibuat SETELAH VERIFIKASI
         certificate_number: null,
 
-        // Waktu akun pertama kali terdaftar
+        // Tanggal registrasi pertama.
         registered_at: registeredAt,
 
-        // Membership belum aktif
+        // Masa keanggotaan belum aktif.
         membership_start_date: null,
         membership_expiry_date: null,
       })
-      .select(
-        `
-            id,
-            email,
-            full_name,
-            role,
-            verification_status,
-            member_number,
-            certificate_number,
-            registered_at
-          `
+
+    if (memberInsertError) {
+      console.error(
+        "Gagal membuat profile member:",
+        memberInsertError
       )
-      .single()
-
-    console.log("New Profile:", newProfile)
-    console.log("Insert Error:", insertError)
-
-    if (insertError) {
-      console.error("GAGAL MEMBUAT PROFILE:", insertError)
 
       return NextResponse.redirect(
-        `${origin}/login?error=profile_creation_failed`
+        new URL("/login?error=profile_creation_failed", origin)
       )
     }
 
-    // =======================================================
-    // Redirect member baru
-    // =======================================================
+    console.log("Profile member baru berhasil dibuat.")
+    console.log("Registered At:", registeredAt)
 
+    // Arahkan member baru ke halaman verifikasi.
+    // Parameter registered=1 digunakan untuk membuka dialog.
     const verificationUrl = new URL("/verification", origin)
 
     verificationUrl.searchParams.set("registered", "1")
-
-    console.log("MEMBER BARU → /verification?registered=1")
-
-    console.log("Member Number:", newProfile.member_number)
-
-    console.log("Certificate Number:", newProfile.certificate_number)
-
-    console.log("Registered At:", newProfile.registered_at)
 
     return NextResponse.redirect(verificationUrl)
   }
 
   // =========================================================
-  // 7. USER SUDAH MEMILIKI PROFILE
+  // 7. PROFILE SUDAH ADA: TENTUKAN TUJUAN REDIRECT
   // =========================================================
 
-  console.log("Profile sudah ada.")
-
-  console.log("Member Number:", profile.member_number)
-
-  console.log("Certificate Number:", profile.certificate_number)
-
-  console.log("Registered At:", profile.registered_at)
-
-  console.log("Role dari Database:", profile.role)
-
+  console.log("Profile sudah tersedia.")
+  console.log("Role:", profile.role)
   console.log("Verification Status:", profile.verification_status)
 
-  // =========================================================
-  // 8. ADMIN
-  // =========================================================
+  // ---------------------------------------------------------
+  // 7A. ADMIN
+  // ---------------------------------------------------------
 
-  // Role dari database menjadi sumber utama.
-  if (profile.role === "admin" || isAdmin) {
+  if (profile.role === "admin") {
     console.log("ADMIN → /admin")
 
     return NextResponse.redirect(new URL("/admin", origin))
   }
 
-  // =========================================================
-  // 9. MEMBER VERIFIED
-  // =========================================================
+  // ---------------------------------------------------------
+  // 7B. EMAIL ADMIN TETAPI PROFILE BELUM BERROLE ADMIN
+  // ---------------------------------------------------------
+  //
+  // Jangan langsung memberikan akses admin hanya berdasarkan
+  // email apabila role database masih member.
+  //
+  // Sinkronkan role admin melalui proses administrasi yang
+  // tepercaya jika email ini memang harus menjadi admin.
 
-  if (profile.role === "member" && profile.verification_status === "verified") {
+  if (isAdmin && profile.role !== "admin") {
+    console.error(
+      "Email terdaftar sebagai admin, tetapi role profile bukan admin.",
+      {
+        userId: user.id,
+        role: profile.role,
+      }
+    )
+
+    return NextResponse.redirect(
+      new URL("/login?error=role_mismatch", origin)
+    )
+  }
+
+  // ---------------------------------------------------------
+  // 7C. MEMBER SUDAH TERVERIFIKASI
+  // ---------------------------------------------------------
+
+  if (
+    profile.role === "member" &&
+    profile.verification_status === "verified"
+  ) {
     console.log("MEMBER VERIFIED → /dashboard")
 
-    return NextResponse.redirect(`${origin}/dashboard`)
+    return NextResponse.redirect(
+      new URL("/dashboard", origin)
+    )
+  }
+
+  // ---------------------------------------------------------
+  // 7D. MEMBER BELUM TERVERIFIKASI
+  // ---------------------------------------------------------
+
+  if (profile.role === "member") {
+    console.log("MEMBER BELUM VERIFIED → /verification")
+
+    return NextResponse.redirect(
+      new URL("/verification", origin)
+    )
   }
 
   // =========================================================
-  // 10. MEMBER BELUM VERIFIED
+  // 8. ROLE TIDAK DIKENALI
   // =========================================================
 
-  console.log("MEMBER BELUM VERIFIED → /verification")
+  console.error("Role profile tidak dikenali:", profile.role)
 
-  return NextResponse.redirect(`${origin}/verification`)
+  return NextResponse.redirect(
+    new URL("/login?error=invalid_role", origin)
+  )
 }
