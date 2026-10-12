@@ -59,7 +59,7 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="min-h-screen bg-muted/30">
+    <main className="min-h-screen bg-white">
       <div className="grid min-h-screen lg:grid-cols-2">
         {/* LEFT — BRANDING */}
         <section className="relative hidden overflow-hidden bg-[#071538] lg:flex">
