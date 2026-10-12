@@ -48,6 +48,11 @@ const navigation = {
       href: "/keanggotaan/verifikasi-sertifikat",
       description: "Periksa keaslian sertifikat Anda.",
     },
+    {
+      title: "Sebaran Anggota",
+      href: "/keanggotaan/sebaran-anggota",
+      description: "Lihat statistik keanggotaan.",
+    },
   ],
 }
 
