@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
 
   title: {
-    default: "ASPROKA Indonesia | Asosiasi Profesi Pengembang AI",
+    default: "ASPROKA Indonesia | Asosiasi Profesi Pengembang Kecerdasan Artifisial",
     template: "%s | ASPROKA Indonesia",
   },
 
@@ -39,24 +39,24 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "id_ID",
-    url: siteUrl,
+    url: "https://asprokaindonesia.id",
     siteName: "ASPROKA Indonesia",
-    title: "ASPROKA Indonesia | Asosiasi Profesi Pengembang AI",
+    title: "ASPROKA Indonesia | Asosiasi Profesi Pengembang Kecerdasan Artifisial",
     description:
-      "Bergabunglah dengan ASPROKA Indonesia untuk mengembangkan kompetensi, memperluas jaringan profesional, dan berkolaborasi dalam bidang kecerdasan artifisial.",
+      "Website resmi ASPROKA Indonesia, Asosiasi Profesi Pengembang Kecerdasan Artifisial.",
     images: [
       {
-        url: "/opengraph-image.jpg",
+        url: "/opengraph-image.png",
         width: 1200,
         height: 630,
-        alt: "ASPROKA Indonesia",
+        alt: "Website resmi ASPROKA Indonesia",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "ASPROKA Indonesia | Asosiasi Profesi Pengembang AI",
+    title: "ASPROKA Indonesia | Asosiasi Profesi Kecerdasan Artifisial",
     description: "Asosiasi Profesi Pengembang Kecerdasan Artifisial Indonesia.",
     images: ["/opengraph-image.jpg"],
   },
