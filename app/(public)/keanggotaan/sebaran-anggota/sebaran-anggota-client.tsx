@@ -287,7 +287,7 @@ export default function SebaranAnggotaClient({
                         )
 
                         const provinceData = provinceLookup.get(
-                          normalizeProvince(provinceName)
+                          normalizeProvince(provinceName)  
                         )
 
                         const count = provinceData?.member_count ?? 0

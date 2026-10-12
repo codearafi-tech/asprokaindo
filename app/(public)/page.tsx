@@ -120,7 +120,7 @@ export default async function Page() {
             memajukan ekosistem AI di Indonesia.
           </p>
           <Button asChild size="lg" variant="secondary" className="w-fit">
-            <Link href="/register">Selengkapnya</Link>
+            <Link href="/tentang-kami">Selengkapnya</Link>
           </Button>
         </div>
       </section>
