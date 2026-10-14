@@ -77,7 +77,7 @@ function StatCard({
         <div className="min-w-0">
           <p className="text-sm text-slate-500">{title}</p>
 
-          <p className="mt-3 text-2xl font-semibold tracking-tight wrap-break-words text-slate-900">
+          <p className="wrap-break-words mt-3 text-2xl font-semibold tracking-tight text-slate-900">
             {value}
           </p>
 
@@ -177,7 +177,7 @@ export default function SebaranAnggotaClient({
           </p>
         </div>
       </section>
-      
+
       <div className="mx-auto max-w-7xl space-y-6 px-6 py-8 sm:px-8 md:py-10 lg:px-20">
         {/* ERROR DATABASE */}
         {hasError && (
@@ -270,6 +270,8 @@ export default function SebaranAnggotaClient({
                     width: "100%",
                     height: "auto",
                     maxHeight: "520px",
+                    backgroundColor: "#FFFFFF",
+                    display: "block",
                   }}
                 >
                   <Geographies geography={GEO_URL}>
@@ -287,7 +289,7 @@ export default function SebaranAnggotaClient({
                         )
 
                         const provinceData = provinceLookup.get(
-                          normalizeProvince(provinceName)  
+                          normalizeProvince(provinceName)
                         )
 
                         const count = provinceData?.member_count ?? 0
@@ -316,12 +318,14 @@ export default function SebaranAnggotaClient({
                               {
                                 default: {
                                   fill: isSelected ? "#F59E0B" : fill,
+                                  fillOpacity: 1,
                                   stroke: "#FFFFFF",
                                   strokeWidth: isSelected ? 1.2 : 0.7,
                                   outline: "none",
                                 },
                                 hover: {
                                   fill: "#F59E0B",
+                                  fillOpacity: 1,
                                   stroke: "#FFFFFF",
                                   strokeWidth: 1.2,
                                   outline: "none",
@@ -329,9 +333,12 @@ export default function SebaranAnggotaClient({
                                 },
                                 pressed: {
                                   fill: "#D97706",
+                                  fillOpacity: 1,
+                                  stroke: "#FFFFFF",
+                                  strokeWidth: 1.2,
                                   outline: "none",
                                 },
-                              } as any
+                              } as unknown as React.CSSProperties
                             }
                             aria-label={`${provinceName}: ${count} anggota`}
                             tabIndex={0}
@@ -515,7 +522,7 @@ export default function SebaranAnggotaClient({
         </section>
 
         {/* TABEL PROVINSI */}
-        <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
           <div className="flex flex-col gap-4 border-b border-slate-100 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
             <div>
               <h2 className="text-lg font-semibold text-slate-900">
