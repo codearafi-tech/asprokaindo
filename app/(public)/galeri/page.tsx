@@ -150,7 +150,7 @@ export default function GaleriPage() {
           </h1>
 
           <p className="mt-4 max-w-2xl text-sm leading-7 text-white/80 md:text-base">
-            Dokumentasi berbagai kegiatan, program, dan aktivitas ASPROKAINDO
+            Dokumentasi berbagai aktivitas dan kegiatan asosiasi
             dalam mendukung pengembangan kompetensi profesional dan kemajuan
             ekosistem kecerdasan artifisial Indonesia.
           </p>
@@ -161,7 +161,7 @@ export default function GaleriPage() {
       <section className="mx-auto max-w-7xl px-6 py-16 sm:px-8 md:py-24 lg:px-20">
         <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h2 className="text-2xl font-semibold">Dokumentasi Kegiatan</h2>
+            <h2 className="text-2xl font-medium tracking-tight text-slate-900 sm:text-3xl">Dokumentasi Kegiatan</h2>
             <p className="mt-2 text-sm text-muted-foreground">
               {activities.length} kegiatan dipublikasikan
             </p>

@@ -293,13 +293,13 @@ export default function Navbar() {
                 
 
                 {/* MARKETPLACE */}
-                <NavigationMenuItem>
+                {/* <NavigationMenuItem>
                   <NavigationMenuLink asChild>
                     <Link href="/tentang-kami" className={navigationLinkClass}>
                       Marketplace
                     </Link>
                   </NavigationMenuLink>
-                </NavigationMenuItem>
+                </NavigationMenuItem> */}
               </NavigationMenuList>
             </NavigationMenu>
 
