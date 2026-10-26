@@ -1,3 +1,4 @@
+
 "use client"
 
 import * as React from "react"
@@ -9,6 +10,7 @@ import {
   Settings2,
   ChevronRight,
   WalletCards,
+  Images,
 } from "lucide-react"
 
 import {
@@ -61,6 +63,11 @@ export function AppSidebar() {
       url: "/admin/keuangan",
       icon: WalletCards,
     },
+    {
+      title: "Galeri",
+      url: "/admin/galeri",
+      icon: Images,
+    },
   ]
 
   const handleLogout = async () => {
@@ -78,11 +85,14 @@ export function AppSidebar() {
           alt="Logo Asproka"
           className="w-8 object-contain brightness-0 invert"
         />
+
         <div className="flex flex-col">
           <h2 className="text-base leading-none font-semibold tracking-tight uppercase">
             Asproka
           </h2>
-          <p className="mt-1 text-xs text-blue-100/90">Admin Portal</p>
+          <p className="mt-1 text-xs text-blue-100/90">
+            Admin Portal
+          </p>
         </div>
       </SidebarHeader>
 
@@ -95,8 +105,19 @@ export function AppSidebar() {
               {/* Menu utama */}
               {adminItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild isActive={pathname === item.url}>
-                    <Link href={item.url} className="flex items-center gap-3">
+                  <SidebarMenuButton
+                    asChild
+                    isActive={
+                      item.url === "/admin"
+                        ? pathname === "/admin"
+                        : pathname === item.url ||
+                          pathname.startsWith(`${item.url}/`)
+                    }
+                  >
+                    <Link
+                      href={item.url}
+                      className="flex items-center gap-3"
+                    >
                       <item.icon className="h-4 w-4" />
                       <span>{item.title}</span>
                     </Link>
@@ -117,7 +138,6 @@ export function AppSidebar() {
                       isActive={isManagementActive}
                     >
                       <Settings2 className="h-4 w-4" />
-
                       <span>Manajemen</span>
 
                       <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
@@ -130,7 +150,9 @@ export function AppSidebar() {
                       <SidebarMenuSubItem>
                         <SidebarMenuSubButton
                           asChild
-                          isActive={pathname === "/admin/manajemen/anggota"}
+                          isActive={
+                            pathname === "/admin/manajemen/anggota"
+                          }
                         >
                           <Link href="/admin/manajemen/anggota">
                             <span>Manajemen Anggota</span>
@@ -142,7 +164,9 @@ export function AppSidebar() {
                       <SidebarMenuSubItem>
                         <SidebarMenuSubButton
                           asChild
-                          isActive={pathname === "/admin/manajemen/kegiatan"}
+                          isActive={
+                            pathname === "/admin/manajemen/kegiatan"
+                          }
                         >
                           <Link href="/admin/manajemen/kegiatan">
                             <span>Manajemen Kegiatan</span>

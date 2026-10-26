@@ -290,6 +290,16 @@ export default function Navbar() {
                     </Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
+                
+
+                {/* MARKETPLACE */}
+                <NavigationMenuItem>
+                  <NavigationMenuLink asChild>
+                    <Link href="/tentang-kami" className={navigationLinkClass}>
+                      Marketplace
+                    </Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
 

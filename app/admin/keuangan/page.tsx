@@ -55,7 +55,7 @@ export default async function FinancialPage() {
     return (
       <div className="space-y-6">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">
+          <h1 className="text-xl font-semibold tracking-tight">
             Keuangan
           </h1>
 
@@ -102,7 +102,7 @@ export default async function FinancialPage() {
       {/* Header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">
+          <h1 className="text-xl font-semibold tracking-tight">
             Keuangan
           </h1>
 

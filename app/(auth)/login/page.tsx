@@ -1,4 +1,3 @@
-
 "use client"
 
 import { useState } from "react"
@@ -25,7 +24,7 @@ export default function LoginPage() {
       // Production: https://asprokaindo-coderaf.vercel.app/auth/callback
       const redirectTo = new URL(
         "/auth/callback",
-        window.location.origin,
+        window.location.origin
       ).toString()
 
       console.log("OAuth redirectTo:", redirectTo)
@@ -63,9 +62,9 @@ export default function LoginPage() {
       <div className="grid min-h-screen lg:grid-cols-2">
         {/* LEFT — BRANDING */}
         <section className="relative hidden overflow-hidden bg-[#071538] lg:flex">
-          <div className="pointer-events-none absolute -left-32 -top-32 size-96 rounded-full bg-blue-500/20 blur-3xl" />
+          <div className="pointer-events-none absolute -top-32 -left-32 size-96 rounded-full bg-blue-500/20 blur-3xl" />
 
-          <div className="pointer-events-none absolute -bottom-40 -right-20 size-125 rounded-full bg-blue-400/10 blur-3xl" />
+          <div className="pointer-events-none absolute -right-20 -bottom-40 size-125 rounded-full bg-blue-400/10 blur-3xl" />
 
           <div className="relative z-10 flex w-full flex-col justify-between p-10 xl:p-14">
             <Link href="/" className="inline-flex w-fit items-center gap-4">
@@ -90,9 +89,8 @@ export default function LoginPage() {
               </h1>
 
               <p className="mt-6 max-w-md text-sm leading-7 text-white/55">
-                Akses portal anggota untuk mengelola keanggotaan,
-                mengikuti kegiatan, dan mendapatkan berbagai layanan
-                ASPROKAI.
+                Akses portal anggota untuk mengelola keanggotaan, mengikuti
+                kegiatan, dan mendapatkan berbagai layanan ASPROKAI.
               </p>
             </div>
 
@@ -109,10 +107,14 @@ export default function LoginPage() {
             <div className="mb-10 lg:hidden">
               <Link
                 href="/"
-                className="text-xl font-semibold tracking-tight text-foreground flex items-center gap-2"
+                className="flex items-center gap-2 text-xl font-semibold tracking-tight text-foreground"
               >
                 <div>
-                  <img src="/Asproka-logo.png" alt="asosiasi logo" className="w-8" />
+                  <img
+                    src="/Asproka-logo.png"
+                    alt="asosiasi logo"
+                    className="w-8"
+                  />
                 </div>
                 ASPROKAI
               </Link>
@@ -149,9 +151,7 @@ export default function LoginPage() {
               >
                 <FcGoogle className="size-5" />
 
-                {loading
-                  ? "Menghubungkan..."
-                  : "Lanjutkan dengan Google"}
+                {loading ? "Menghubungkan..." : "Lanjutkan dengan Google"}
               </Button>
 
               {errorMessage && (
@@ -163,18 +163,7 @@ export default function LoginPage() {
                 </div>
               )}
 
-              {/* Divider */}
-              <div className="my-6 flex items-center gap-4">
-                <div className="h-px flex-1 bg-border" />
-
-                <span className="text-[11px] text-muted-foreground">
-                  AMAN & TERPERCAYA
-                </span>
-
-                <div className="h-px flex-1 bg-border" />
-              </div>
-
-              <p className="text-center text-xs leading-5 text-muted-foreground">
+              <p className="mt-6 text-center text-xs leading-5 text-muted-foreground">
                 Dengan melanjutkan, Anda akan diarahkan ke Google untuk
                 melakukan autentikasi secara aman.
               </p>
@@ -184,8 +173,8 @@ export default function LoginPage() {
             <div className="mt-6 rounded-xl bg-muted/50 px-5 py-4">
               <p className="text-xs leading-5 text-muted-foreground">
                 Belum terdaftar sebagai anggota? Tidak perlu membuat akun
-                terlebih dahulu. Login menggunakan Google untuk memulai
-                proses pendaftaran.
+                terlebih dahulu. Login menggunakan Google untuk memulai proses
+                pendaftaran.
               </p>
             </div>
           </div>
